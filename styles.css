@@ -1,0 +1,297 @@
+/* =========================================================
+   АТЛАС ПОРОД — стили
+   Концепция: премиальный иллюстрированный полевой справочник
+   Палитра: тёплый крем, чернильно-зелёный, терракота, мох
+   ========================================================= */
+
+:root{
+  --bg:        #F7F3EC;   /* тёплый кремовый фон, не чисто белый */
+  --bg-card:   #FFFDF8;   /* карточки чуть светлее фона */
+  --ink:       #1F3A2E;   /* глубокий чернильно-зелёный текст */
+  --ink-soft:  #4A5C50;   /* приглушённый текст */
+  --accent:    #C8743A;   /* терракотово-янтарный акцент */
+  --accent-dk: #A95C28;
+  --moss:      #7A8B6F;   /* мягкий мох */
+  --line:      #E4DCCD;   /* линии и рамки */
+  --shadow:    0 1px 2px rgba(31,58,46,.04), 0 8px 24px rgba(31,58,46,.06);
+  --shadow-lg: 0 2px 4px rgba(31,58,46,.05), 0 18px 50px rgba(31,58,46,.12);
+  --radius:    18px;
+  --maxw:      1120px;
+  --ease:      cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+img{max-width:100%;display:block}
+
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;line-height:1.1;font-weight:500;letter-spacing:-.01em}
+
+a{color:inherit;text-decoration:none}
+
+/* ---- Доступность: фокус и skip-link ---- */
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.skip-link{
+  position:absolute;left:-999px;top:0;z-index:100;
+  background:var(--ink);color:#fff;padding:.7rem 1.2rem;border-radius:0 0 10px 0;
+}
+.skip-link:focus{left:0}
+
+/* ---- Контейнерные отступы ---- */
+.hero,.breeds,.how,.about,.section-head{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+
+.eyebrow{
+  font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent-dk);font-weight:600;margin-bottom:.9rem;
+}
+
+/* =========================================================
+   ШАПКА
+   ========================================================= */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{max-width:var(--maxw);margin-inline:auto;padding:14px clamp(20px,5vw,40px);display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:600}
+.brand-mark{color:var(--accent);display:grid;place-items:center}
+.brand-text{font-family:'Fraunces',serif;font-size:1.18rem;font-weight:600;letter-spacing:-.01em}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-size:.97rem;color:var(--ink-soft);font-weight:500;position:relative;padding:.2rem 0}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--accent);transition:width .25s var(--ease)}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after{width:100%}
+
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+.nav-toggle span{width:24px;height:2px;background:var(--ink);border-radius:2px;transition:.3s var(--ease)}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4rem);align-items:center;padding-block:clamp(3rem,8vw,6rem)}
+.hero-title{font-size:clamp(2.4rem,6vw,4.1rem);margin-bottom:1.3rem}
+.hero-title em{font-style:italic;color:var(--accent)}
+.hero-lead{font-size:1.12rem;color:var(--ink-soft);max-width:46ch;margin-bottom:2rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:2.6rem}
+
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.5rem;border-radius:999px;font-weight:600;font-size:.98rem;transition:transform .2s var(--ease),box-shadow .2s var(--ease),background .2s var(--ease);border:1.5px solid transparent}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:var(--shadow)}
+.btn-primary:hover{background:var(--accent-dk);transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.btn-ghost{border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+
+.hero-stats{display:flex;gap:2.4rem;flex-wrap:wrap}
+.hero-stats dt{font-size:.8rem;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:.2rem}
+.hero-stats dd{font-family:'Fraunces',serif;font-size:2rem;font-weight:600;display:flex;align-items:baseline;gap:.4rem}
+.hero-stats dd span{font-family:'Inter',sans-serif;font-size:.72rem;color:var(--moss);font-weight:500}
+
+.hero-figure{display:grid;place-items:center}
+.hero-card{position:relative;width:100%;max-width:380px;aspect-ratio:4/5;background:var(--bg-card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-lg);display:grid;place-items:center;overflow:hidden}
+.hero-card::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 70% 10%,rgba(200,116,58,.10),transparent 60%)}
+.hero-card-label{position:absolute;bottom:18px;left:20px;font-size:.8rem;color:var(--ink-soft);letter-spacing:.04em;background:var(--bg);padding:.35rem .7rem;border-radius:999px;border:1px solid var(--line)}
+
+/* =========================================================
+   ИЛЛЮСТРАЦИИ СОБАК (чистый CSS, без внешних картинок)
+   Переменная --coat задаёт окрас — переключается скриптом
+   ========================================================= */
+.dog-silhouette,.breed-art,.dog-husky,.dog-malamute,.dog-bernese{--coat:#6b6b6b;--coat2:#cfcfcf}
+[class*="dog-"]{
+  position:relative;width:min(70%,240px);aspect-ratio:1;
+}
+/* Голова + морда через слои градиентов и форм */
+[class*="dog-"]::before{
+  content:"";position:absolute;inset:12% 18%;border-radius:48% 48% 46% 46%/55% 55% 45% 45%;
+  background:
+    radial-gradient(circle at 50% 78%, var(--coat2) 0 18%, transparent 19%),
+    linear-gradient(160deg,var(--coat),color-mix(in srgb,var(--coat) 70%, #000) 100%);
+  box-shadow:inset 0 -10px 24px rgba(0,0,0,.18);
+}
+/* Уши */
+[class*="dog-"]::after{
+  content:"";position:absolute;top:4%;left:50%;width:78%;height:34%;transform:translateX(-50%);
+  background:
+    radial-gradient(60% 100% at 12% 100%, var(--coat) 0 60%, transparent 61%),
+    radial-gradient(60% 100% at 88% 100%, var(--coat) 0 60%, transparent 61%);
+}
+.dog-husky{--coat:#3a3a3a;--coat2:#f4f4f4}
+.dog-malamute{--coat:#4a4036;--coat2:#efe7d8}
+.dog-bernese{--coat:#241c16;--coat2:#e8e2d6}
+.breed-art{width:88px;height:88px;flex:0 0 auto}
+
+/* =========================================================
+   ОБЩИЙ ЗАГОЛОВОК СЕКЦИИ
+   ========================================================= */
+.section-head{text-align:center;padding-block:clamp(2.5rem,6vw,4rem) 1.5rem}
+.section-head h2{font-size:clamp(2rem,4.5vw,2.9rem);margin-bottom:.7rem}
+.section-note{color:var(--ink-soft);max-width:54ch;margin-inline:auto}
+
+/* =========================================================
+   КАТАЛОГ ПОРОД
+   ========================================================= */
+.breeds{padding-bottom:clamp(3rem,7vw,5rem)}
+.breed-grid{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
+.breed-card{
+  position:relative;display:grid;grid-template-rows:auto auto 1fr auto;gap:1rem;
+  background:var(--bg-card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.6rem 1.6rem 1.4rem;box-shadow:var(--shadow);
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease),border-color .28s var(--ease);
+  height:100%;
+}
+.breed-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:#d8cdb8}
+.breed-num{font-family:'Fraunces',serif;font-size:.9rem;color:var(--moss);letter-spacing:.1em}
+.breed-card .breed-art{margin:.3rem auto .2rem}
+.breed-name{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:600;display:block;margin-bottom:.35rem}
+.breed-tag{display:block;color:var(--accent-dk);font-size:.9rem;font-weight:500;margin-bottom:.5rem}
+.breed-meta{display:block;color:var(--ink-soft);font-size:.86rem}
+.breed-go{font-weight:600;font-size:.92rem;color:var(--ink);display:inline-flex;gap:.3rem;transition:gap .2s var(--ease)}
+.breed-card:hover .breed-go{gap:.7rem;color:var(--accent)}
+
+/* =========================================================
+   КАК ЧИТАТЬ КАРТОЧКУ
+   ========================================================= */
+.how{background:linear-gradient(180deg,transparent,rgba(122,139,111,.06));padding-bottom:clamp(3rem,7vw,5rem);max-width:none}
+.how>.section-head,.how>.how-list{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+.how-list{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem 2.4rem}
+.how-list li{display:flex;gap:1.1rem;align-items:flex-start;padding-block:.6rem;border-top:1px solid var(--line)}
+.how-n{font-family:'Fraunces',serif;font-size:1.4rem;color:var(--accent);font-weight:600;flex:0 0 auto;width:2ch}
+.how-list h3{font-size:1.2rem;margin-bottom:.25rem}
+.how-list p{color:var(--ink-soft);font-size:.95rem}
+
+/* =========================================================
+   О ПРОЕКТЕ
+   ========================================================= */
+.about{padding-block:clamp(3.5rem,8vw,6rem)}
+.about-inner{max-width:62ch;margin-inline:auto;text-align:center}
+.about-inner h2{font-size:clamp(2rem,4.5vw,2.8rem);margin-bottom:1.3rem}
+.about-inner p{color:var(--ink-soft);margin-bottom:1.1rem;font-size:1.05rem}
+.about-note{font-size:.95rem;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.3rem}
+
+/* =========================================================
+   ПОДВАЛ
+   ========================================================= */
+.site-footer{border-top:1px solid var(--line);margin-top:2rem;background:#F2ECE0}
+.footer-inner{max-width:var(--maxw);margin-inline:auto;padding:clamp(2.5rem,6vw,4rem) clamp(20px,5vw,40px) 1.5rem;display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between}
+.footer-note{color:var(--ink-soft);font-size:.9rem;max-width:42ch;margin-top:.6rem}
+.site-footer nav{display:flex;flex-direction:column;gap:.7rem}
+.site-footer nav a{color:var(--ink-soft);font-size:.95rem}
+.site-footer nav a:hover{color:var(--accent)}
+.footer-copy{text-align:center;color:var(--moss);font-size:.85rem;padding:1rem;border-top:1px solid var(--line)}
+
+/* =========================================================
+   АДАПТИВ
+   ========================================================= */
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;text-align:left}
+  .hero-figure{order:-1}
+  .hero-card{max-width:300px}
+  .nav-toggle{display:flex}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--bg);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .35s var(--ease);
+  }
+  .nav-links.open{max-height:320px}
+  .nav-links li{border-top:1px solid var(--line)}
+  .nav-links a{display:block;padding:1rem clamp(20px,5vw,40px)}
+  .nav-links a::after{display:none}
+}
+
+@media (max-width:480px){
+  body{font-size:16px}
+  .hero-stats{gap:1.5rem}
+  .hero-stats dd{font-size:1.6rem}
+}
+
+/* ---- Уважение к настройке «уменьшить движение» ---- */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+
+/* =========================================================
+   СТРАНИЦА ПОРОДЫ
+   ========================================================= */
+.breed-page{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,40px)}
+
+.crumbs{display:flex;gap:.5rem;align-items:center;font-size:.88rem;color:var(--ink-soft);padding-block:1.6rem .4rem}
+.crumbs a:hover{color:var(--accent)}
+.crumbs span{color:var(--moss)}
+
+/* Заголовок породы */
+.breed-hero{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding-block:1.5rem clamp(2.5rem,6vw,4rem)}
+.breed-hero-text .breed-index{font-family:'Fraunces',serif;color:var(--moss);letter-spacing:.1em;margin-bottom:.6rem}
+.breed-hero-text h1{font-size:clamp(2.3rem,5.5vw,3.6rem);margin-bottom:1rem}
+.breed-hero-text .lead{font-size:1.12rem;color:var(--ink-soft);max-width:48ch}
+.breed-portrait{background:var(--bg-card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-lg);aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden}
+.breed-portrait::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 10%,rgba(122,139,111,.12),transparent 60%)}
+
+/* Быстрые факты */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-bottom:clamp(2.5rem,6vw,4rem)}
+.facts div{background:var(--bg-card);padding:1.1rem 1.2rem}
+.facts dt{font-size:.78rem;letter-spacing:.04em;color:var(--ink-soft);margin-bottom:.3rem;text-transform:uppercase}
+.facts dd{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600}
+
+/* Разделы контента */
+.breed-section{padding-block:clamp(2rem,5vw,3rem);border-top:1px solid var(--line)}
+/* Анимация появления — только если JS пометил <html> классом js-reveal.
+   Без JS контент виден сразу (прогрессивное улучшение). */
+.js-reveal .breed-section[data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.js-reveal .breed-section[data-reveal].is-visible{opacity:1;transform:none}
+.breed-section .sec-eyebrow{font-family:'Fraunces',serif;color:var(--accent);font-size:1rem;margin-bottom:.4rem}
+.breed-section h2{font-size:clamp(1.7rem,3.6vw,2.3rem);margin-bottom:1.1rem}
+.breed-section p{color:var(--ink-soft);max-width:64ch;margin-bottom:1rem}
+.breed-section ul{color:var(--ink-soft);max-width:64ch;padding-left:1.2rem;margin-bottom:1rem}
+.breed-section li{margin-bottom:.5rem}
+.breed-section li::marker{color:var(--accent)}
+
+/* Health-карточки */
+.health-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;max-width:none}
+.health-card{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.3rem}
+.health-card h3{font-size:1.1rem;margin-bottom:.4rem}
+.health-card p{font-size:.92rem;margin-bottom:0}
+
+/* ---- Переключатель окрасов (сигнатурный элемент) ---- */
+.coat-block{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,4vw,3rem);align-items:center}
+.coat-preview{background:var(--bg-card);border:1px solid var(--line);border-radius:20px;aspect-ratio:1;display:grid;place-items:center;box-shadow:var(--shadow);position:relative}
+.coat-preview [class*="dog-"]{transition:none}
+.coat-preview [class*="dog-"]::before{transition:background .4s var(--ease)}
+#coat-name{position:absolute;bottom:16px;left:0;right:0;text-align:center;font-family:'Fraunces',serif;font-size:1.1rem;color:var(--ink)}
+.swatches{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.4rem}
+.swatch{display:flex;flex-direction:column;align-items:center;gap:.45rem;background:none;border:0;cursor:pointer;padding:.3rem;border-radius:12px;transition:transform .2s var(--ease)}
+.swatch:hover{transform:translateY(-3px)}
+.swatch-chip{width:46px;height:46px;border-radius:50%;border:2px solid var(--line);box-shadow:inset 0 -6px 12px rgba(0,0,0,.18);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.swatch[aria-pressed="true"] .swatch-chip{border-color:var(--accent);box-shadow:inset 0 -6px 12px rgba(0,0,0,.18),0 0 0 3px rgba(200,116,58,.25)}
+.swatch-label{font-size:.8rem;color:var(--ink-soft)}
+.swatch[aria-pressed="true"] .swatch-label{color:var(--ink);font-weight:600}
+
+/* ---- Галерея фото (плейсхолдеры под реальные снимки) ---- */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+.gallery figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--bg-card)}
+.photo-ph{aspect-ratio:4/3;display:grid;place-items:center;text-align:center;padding:1rem;
+  background:repeating-linear-gradient(135deg,#F1EADB,#F1EADB 12px,#ECE3D2 12px,#ECE3D2 24px);
+  color:var(--moss);font-size:.85rem;position:relative}
+.photo-ph span{background:var(--bg);padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line)}
+.gallery figcaption{padding:.7rem .9rem;font-size:.85rem;color:var(--ink-soft)}
+
+/* Навигация между породами */
+.breed-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding-block:clamp(2.5rem,6vw,4rem)}
+.breed-nav a{background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.4rem;font-weight:600;transition:transform .2s var(--ease),border-color .2s var(--ease)}
+.breed-nav a:hover{transform:translateY(-3px);border-color:var(--accent);color:var(--accent)}
+.breed-nav small{display:block;font-weight:500;color:var(--moss);font-size:.78rem;margin-bottom:.2rem}
+
+@media (max-width:760px){
+  .breed-hero,.coat-block{grid-template-columns:1fr}
+  .breed-portrait{max-width:340px;margin-inline:auto}
+  .coat-preview{max-width:340px;margin-inline:auto}
+}
