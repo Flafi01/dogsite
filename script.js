@@ -25,18 +25,28 @@
 })();
 
 /* ---- Переключатель окрасов (на страницах пород) ----
-   Кнопки с data-coat="#hex,#hex2" перекрашивают иллюстрацию.
+   Кнопки с data-photo="..." меняют реальное фото,
+   либо с data-coat="#hex,#hex2" перекрашивают иллюстрацию.
    Это «сигнатурный» интерактив сайта. */
 (function(){
   const swatches = document.querySelectorAll('.swatch');
+  const photo    = document.getElementById('coat-photo');
   const dog      = document.querySelector('.coat-preview [class*="dog-"]');
   const nameEl   = document.getElementById('coat-name');
-  if(!swatches.length || !dog) return;
+  if(!swatches.length || (!photo && !dog)) return;
 
   function setCoat(btn){
-    const [c1, c2] = btn.dataset.coat.split(',');
-    dog.style.setProperty('--coat', c1.trim());
-    dog.style.setProperty('--coat2', (c2 || c1).trim());
+    // Режим реальных фото
+    if(photo && btn.dataset.photo){
+      photo.src = btn.dataset.photo;
+      photo.alt = 'Аляскинский маламут окраса «' + (btn.dataset.name || '') + '»';
+    }
+    // Режим перекраски иллюстрации (хаски, бернский)
+    if(dog && btn.dataset.coat){
+      const [c1, c2] = btn.dataset.coat.split(',');
+      dog.style.setProperty('--coat', c1.trim());
+      dog.style.setProperty('--coat2', (c2 || c1).trim());
+    }
     swatches.forEach(s => s.setAttribute('aria-pressed','false'));
     btn.setAttribute('aria-pressed','true');
     if(nameEl) nameEl.textContent = btn.dataset.name || '';
