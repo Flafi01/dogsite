@@ -234,6 +234,7 @@ a{color:inherit;text-decoration:none}
 .breed-hero-text h1{font-size:clamp(2.3rem,5.5vw,3.6rem);margin-bottom:1rem}
 .breed-hero-text .lead{font-size:1.12rem;color:var(--ink-soft);max-width:48ch}
 .breed-portrait{background:var(--bg-card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow-lg);aspect-ratio:1;display:grid;place-items:center;position:relative;overflow:hidden}
+.breed-portrait img{width:100%;height:100%;object-fit:cover;border-radius:24px;display:block}
 .breed-portrait::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 30% 10%,rgba(122,139,111,.12),transparent 60%)}
 
 /* Быстрые факты */
@@ -304,3 +305,31 @@ a{color:inherit;text-decoration:none}
   .breed-portrait{max-width:340px;margin-inline:auto}
   .coat-preview{max-width:340px;margin-inline:auto}
 }
+
+/* =========================================================
+   ЦЕНТРИРОВАННАЯ СТРАНИЦА ПОРОДЫ (класс .breed-centered)
+   ========================================================= */
+.breed-centered .breed-section{text-align:center}
+.breed-centered .breed-section p{margin-inline:auto}
+.breed-centered .breed-section .sec-eyebrow{text-align:center}
+
+/* Характеристики — блоки без маркеров, по центру */
+.spec-list{display:flex;flex-direction:column;gap:1.4rem;max-width:64ch;margin-inline:auto}
+.spec-item h3{font-size:1.2rem;margin-bottom:.3rem;color:var(--ink)}
+.spec-item p{color:var(--ink-soft)}
+
+/* Здоровье — карточки по центру */
+.breed-centered .health-grid{justify-content:center}
+.breed-centered .health-card{text-align:center}
+
+/* Окрасы — блок по центру, кнопки по центру */
+.breed-centered .coat-block{justify-items:center}
+.breed-centered .swatches{justify-content:center}
+
+/* Галерея — по центру */
+.breed-centered .gallery-vertical{margin-inline:auto}
+.breed-centered .gallery-vertical figcaption{text-align:center}
+
+/* Заголовок-портрет (hero) центрируем текст */
+.breed-centered .breed-hero-text{text-align:center}
+.breed-centered .breed-hero-text .lead{margin-inline:auto}
