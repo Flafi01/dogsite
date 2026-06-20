@@ -74,3 +74,37 @@
   }, {threshold:.12, rootMargin:'0px 0px -10% 0px'});
   els.forEach(el => io.observe(el));
 })();
+
+/* ---- Карусель окрасов (страница берна) ---- */
+(function(){
+  const photo = document.getElementById('carousel-photo');
+  const prev  = document.querySelector('.carousel-prev');
+  const next  = document.querySelector('.carousel-next');
+  const dotsWrap = document.querySelector('.carousel-dots');
+  if(!photo || !prev || !next) return;
+
+  const slides = [
+    'images/bernese-coat-1.jpg',
+    'images/bernese-coat-2.jpg',
+    'images/bernese-coat-3.jpg'
+  ];
+  let i = 0;
+
+  // точки-индикаторы
+  const dots = slides.map((_, idx) => {
+    const d = document.createElement('span');
+    d.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+    dotsWrap && dotsWrap.appendChild(d);
+    return d;
+  });
+
+  function show(n){
+    i = (n + slides.length) % slides.length;
+    photo.src = slides[i];
+    photo.alt = 'Бернский зенненхунд, фото ' + (i + 1);
+    dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
+  }
+
+  prev.addEventListener('click', () => show(i - 1));
+  next.addEventListener('click', () => show(i + 1));
+})();
