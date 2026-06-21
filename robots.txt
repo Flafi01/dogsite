@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ephemeral-crostata-7bc6aa.netlify.app/sitemap.xml
