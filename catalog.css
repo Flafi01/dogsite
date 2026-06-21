@@ -1,0 +1,43 @@
+/* =========================================================
+   КАТАЛОГ ПОРОД — breeds.html
+   ========================================================= */
+:root{ --edge: clamp(20px, 5vw, 72px); --content: 1180px; }
+
+.catalog-head{padding:clamp(2.5rem,6vw,5rem) var(--edge) clamp(1.5rem,3vw,2.5rem)}
+.catalog-head-inner{max-width:var(--content);margin-inline:auto}
+.catalog-head .crumbs{margin-bottom:1.5rem;font-size:.9rem;color:var(--ink-soft)}
+.catalog-head .crumbs a{color:var(--accent-dk)}
+.catalog-head .crumbs span{margin:0 .5rem;color:var(--line)}
+.catalog-head h1{font-size:clamp(2.4rem,5.5vw,4rem);margin-bottom:1rem}
+.catalog-head p{font-size:clamp(1.05rem,1.6vw,1.25rem);color:var(--ink-soft);max-width:60ch}
+
+.catalog-grid-section{padding:clamp(1rem,2vw,2rem) var(--edge) clamp(4rem,8vw,7rem)}
+.catalog-grid{
+  max-width:var(--content);margin-inline:auto;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:clamp(1.2rem,2.5vw,2rem);
+}
+
+.catalog-card{
+  display:flex;flex-direction:column;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:22px;overflow:hidden;box-shadow:var(--shadow);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.catalog-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.catalog-photo{aspect-ratio:4/3;overflow:hidden}
+.catalog-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.catalog-card:hover .catalog-photo img{transform:scale(1.05)}
+.catalog-body{padding:1.6rem 1.7rem 1.8rem}
+.catalog-body h2{font-size:1.5rem;margin-bottom:.5rem}
+.catalog-tag{color:var(--accent-dk);font-size:.95rem;margin-bottom:.4rem}
+.catalog-meta{color:var(--ink-soft);font-size:.92rem;margin-bottom:1.1rem}
+.catalog-link{color:var(--ink);font-weight:600;font-size:.98rem}
+.catalog-card:hover .catalog-link{color:var(--accent)}
+
+@media (max-width:900px){
+  .catalog-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .catalog-grid{grid-template-columns:1fr;max-width:440px}
+}

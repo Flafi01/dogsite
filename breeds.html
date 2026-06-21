@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Все породы — Атлас больших пород собак</title>
+<meta name="description" content="Полный каталог больших пород собак в атласе: сибирский хаски, аляскинский маламут, бернский зенненхунд.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="home.css">
+<link rel="stylesheet" href="catalog.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">К содержанию</a>
+
+<header class="site-header" id="top">
+  <nav class="nav" aria-label="Основная навигация">
+    <a class="brand" href="index.html">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <path d="M9 14c-2.2 0-3.5-2-3-4 .4-1.6 2-2 3 0 .8 1.6.5 4 0 4zm14 0c-1 0-1.3-2.4-.5-4 1-2 2.6-1.6 3-0 .5 2-0.8 4-2.5 4zM6 22c-2 0-3-2-2.2-3.7.7-1.5 2.2-1 2.7.6.4 1.4.3 3.1-.5 3.1zm20 0c-.8 0-.9-1.7-.5-3.1.5-1.6 2-2.1 2.7-.6C29 20 28 22 26 22zM16 16c4 0 7 3 7 6.5 0 2.8-2.2 4-4 3.2-1.2-.5-2-.5-3 0-1.8.8-4-.4-4-3.2C12 19 13.5 16 16 16z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-text">Атлас&nbsp;больших&nbsp;пород</span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html#breeds">Породы</a></li>
+      <li><a href="index.html#how">Путь по карточке</a></li>
+      <li><a href="index.html#about">От автора</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <section class="catalog-head">
+    <div class="catalog-head-inner">
+      <nav class="crumbs" aria-label="Хлебные крошки">
+        <a href="index.html">Атлас</a><span>/</span> Все породы
+      </nav>
+      <h1>Большие породы</h1>
+      <p>Подробные карточки больших пород собак: характер и повадки, особенности здоровья, окрасы и реальные фотографии. Выбирайте породу, чтобы узнать её ближе.</p>
+    </div>
+  </section>
+
+  <section class="catalog-grid-section">
+    <div class="catalog-grid">
+
+      <a class="catalog-card" href="husky.html">
+        <div class="catalog-photo"><img src="images/husky-hero.jpg" alt="Сибирский хаски"></div>
+        <div class="catalog-body">
+          <h2>Сибирский хаски</h2>
+          <p class="catalog-tag">Выносливый, дружелюбный, говорливый</p>
+          <p class="catalog-meta">21–28 кг · 54–60 см · 12–15 лет</p>
+          <span class="catalog-link">Смотреть карточку →</span>
+        </div>
+      </a>
+
+      <a class="catalog-card" href="malamute.html">
+        <div class="catalog-photo"><img src="images/malamute-hero.jpg" alt="Аляскинский маламут"></div>
+        <div class="catalog-body">
+          <h2>Аляскинский маламут</h2>
+          <p class="catalog-tag">Мощный, ласковый, упрямый</p>
+          <p class="catalog-meta">36–43 кг · 63–70 см · 10–14 лет</p>
+          <span class="catalog-link">Смотреть карточку →</span>
+        </div>
+      </a>
+
+      <a class="catalog-card" href="bernese.html">
+        <div class="catalog-photo"><img src="images/bernese-hero.jpg" alt="Бернский зенненхунд"></div>
+        <div class="catalog-body">
+          <h2>Бернский зенненхунд</h2>
+          <p class="catalog-tag">Добрый, спокойный, семейный</p>
+          <p class="catalog-meta">38–50 кг · 64–70 см · 8–10 лет</p>
+          <span class="catalog-link">Смотреть карточку →</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <span class="brand-text">Атлас&nbsp;больших&nbsp;пород&nbsp;собак</span>
+      <p class="footer-note">Справочный проект о больших собаках. Информация носит ознакомительный характер и не заменяет консультацию ветеринара.</p>
+    </div>
+    <nav aria-label="Подвал">
+      <a href="index.html#breeds">Породы</a>
+      <a href="index.html#how">Путь по карточке</a>
+      <a href="index.html#about">От автора</a>
+      <a href="#top">Наверх ↑</a>
+    </nav>
+  </div>
+  <p class="footer-copy">© 2026 Атлас больших пород собак</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
