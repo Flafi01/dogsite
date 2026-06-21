@@ -105,8 +105,8 @@
 }
 .breed-cards{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:clamp(1rem,2vw,1.8rem);
+  grid-template-columns:repeat(4,1fr);
+  gap:clamp(1rem,1.6vw,1.4rem);
 }
 .breed-photo-card{
   position:relative;
@@ -192,6 +192,9 @@
 /* =========================================================
    АДАПТИВ
    ========================================================= */
+@media (max-width:1024px) and (min-width:861px){
+  .breed-cards{grid-template-columns:repeat(2,1fr);max-width:720px;margin-inline:auto}
+}
 @media (max-width:860px){
   .breed-cards{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
   .snake-step,
@@ -223,3 +226,40 @@
   pointer-events:none;
 }
 .home .nav-toggle span{background:#fff}
+
+/* =========================================================
+   СТРАНИЦА КАТАЛОГА (breeds.html)
+   ========================================================= */
+.catalog-head{padding:clamp(2.5rem,6vw,4.5rem) var(--edge) 0}
+.catalog-head .crumbs{font-size:.9rem;color:var(--ink-soft);margin-bottom:1.5rem;display:flex;gap:.6rem;align-items:center}
+.catalog-head .crumbs a{color:var(--accent-dk)}
+.catalog-head .crumbs span{color:var(--line)}
+.catalog-head h1{font-family:'Fraunces',serif;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.02;margin-bottom:1.2rem}
+.catalog-head p{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--ink-soft);max-width:60ch;line-height:1.6}
+.catalog-grid-section{padding-top:clamp(2.5rem,5vw,3.5rem)}
+.catalog-cards{grid-template-columns:repeat(3,1fr)}
+@media (max-width:860px){
+  .catalog-cards{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
+}
+
+/* =========================================================
+   ЛИПКАЯ ШАПКА НА ГЛАВНОЙ при прокрутке вниз
+   ========================================================= */
+.home .site-header-overlay{
+  position:fixed;
+  transition:background .35s var(--ease), box-shadow .35s var(--ease), transform .35s var(--ease);
+}
+/* Состояние «прокручено»: светлая закреплённая панель как на страницах пород */
+.home .site-header-overlay.is-stuck{
+  background:rgba(247,243,236,.92);
+  backdrop-filter:saturate(140%) blur(10px);
+  -webkit-backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--line);
+  box-shadow:0 6px 24px rgba(31,58,46,.06);
+}
+.home .site-header-overlay.is-stuck::before{opacity:0}
+.home .site-header-overlay.is-stuck .brand-text,
+.home .site-header-overlay.is-stuck .nav-links a{color:var(--ink)}
+.home .site-header-overlay.is-stuck .brand-mark{color:var(--accent)}
+.home .site-header-overlay.is-stuck .nav-links a:hover{color:var(--accent)}
+.home .site-header-overlay.is-stuck .nav-toggle span{background:var(--ink)}

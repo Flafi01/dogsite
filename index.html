@@ -105,6 +105,13 @@
             <span>Добрый, спокойный, семейный</span>
           </span>
         </a>
+        <a class="breed-photo-card" href="golden.html" data-reveal>
+          <img src="images/golden-hero.jpg" alt="Золотистый ретривер">
+          <span class="breed-card-body">
+            <h3>Золотистый ретривер</h3>
+            <span>Добродушный, преданный, улыбчивый</span>
+          </span>
+        </a>
       </div>
       <div class="see-all-wrap" data-reveal>
         <a class="see-all" href="breeds.html">
@@ -181,6 +188,21 @@
   dots.forEach((d,idx)=>d.addEventListener('click',()=>{ show(idx); reset(); }));
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!reduce) start();
+})();
+
+/* Липкая шапка: прозрачная на обложке, светлая при прокрутке */
+(function(){
+  const header = document.querySelector('.site-header-overlay');
+  const hero = document.querySelector('.hero-full');
+  if(!header || !hero) return;
+  function onScroll(){
+    // переключаем, когда прокрутили примерно на высоту обложки минус шапка
+    const trigger = hero.offsetHeight - 90;
+    if(window.scrollY > trigger) header.classList.add('is-stuck');
+    else header.classList.remove('is-stuck');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
 })();
 </script>
 </body>
