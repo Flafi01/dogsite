@@ -124,3 +124,28 @@
   .breed-premium .breed-portrait{max-width:420px;margin-inline:auto}
   .breed-premium .facts-band .facts{grid-template-columns:repeat(2,1fr);gap:1rem}
 }
+
+/* =========================================================
+   КАРУСЕЛЬ ЩЕНКОВ В ГАЛЕРЕЕ (как обычное фото, стрелки по бокам)
+   ========================================================= */
+.breed-premium .puppy-carousel{
+  aspect-ratio:auto;          /* убираем квадрат */
+  display:block;
+  border-radius:22px;
+  background:#000;            /* на случай загрузки */
+}
+.breed-premium .puppy-carousel img{
+  width:100%;
+  height:auto;                /* естественная высота, как у «семьи» */
+  max-height:620px;
+  object-fit:cover;
+  border-radius:22px;
+  display:block;
+}
+/* стрелки крупнее и уверенно по бокам */
+.breed-premium .puppy-carousel .carousel-arrow{
+  width:50px;height:50px;font-size:1.8rem;
+  background:rgba(255,255,255,.92);
+}
+.breed-premium .puppy-carousel .carousel-prev{left:16px}
+.breed-premium .puppy-carousel .carousel-next{right:16px}
