@@ -275,6 +275,9 @@
 .catalog-head p{font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--ink-soft);max-width:60ch;line-height:1.6}
 .catalog-grid-section{padding-top:clamp(2.5rem,5vw,3.5rem)}
 .catalog-cards{grid-template-columns:repeat(3,1fr)}
+/* Сдвигаем фокус обрезки фото вверх, чтобы морды и уши собак
+   не срезались верхним краем карточки (низ кадра обрезается вместо них) */
+.catalog-cards .breed-photo-card img{object-position:center 28%}
 @media (max-width:860px){
   .catalog-cards{grid-template-columns:1fr;max-width:440px;margin-inline:auto}
 }
