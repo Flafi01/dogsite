@@ -25,8 +25,8 @@
   transition:transform .35s var(--ease),box-shadow .35s var(--ease);
 }
 .catalog-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-.catalog-photo{aspect-ratio:4/3;overflow:hidden}
-.catalog-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.catalog-photo{aspect-ratio:4/5;overflow:hidden}
+.catalog-photo img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform .6s var(--ease)}
 .catalog-card:hover .catalog-photo img{transform:scale(1.05)}
 .catalog-body{padding:1.6rem 1.7rem 1.8rem}
 .catalog-body h2{font-size:1.5rem;margin-bottom:.5rem}
