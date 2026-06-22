@@ -24,6 +24,8 @@
 .sort-btn{padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:.92rem;color:var(--ink);cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
 .sort-btn:hover{border-color:var(--accent)}
 .sort-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.sort-arrow{display:inline-block;margin-left:.4rem;font-size:.95em}
+.sort-arrow:empty{margin-left:0}
 .catalog-count{max-width:var(--content,1180px);margin:0 auto 1.2rem;padding:0 var(--edge,clamp(20px,5vw,72px));font-size:.92rem;color:var(--ink-soft)}
 .catalog-card.is-hidden{display:none}
 .catalog-empty{max-width:var(--content,1180px);margin:0 auto;padding:2rem var(--edge,clamp(20px,5vw,72px));color:var(--ink-soft);font-size:1.05rem}
@@ -80,9 +82,9 @@
       </div>
       <div class="catalog-sort" role="group" aria-label="Сортировка пород">
         <span class="sort-label">Сортировать:</span>
-        <button class="sort-btn" data-sort="name" aria-pressed="false">По алфавиту</button>
-        <button class="sort-btn" data-sort="weight" aria-pressed="false">По весу</button>
-        <button class="sort-btn" data-sort="life" aria-pressed="false">По долголетию</button>
+        <button class="sort-btn" data-sort="name" aria-pressed="false">По алфавиту<span class="sort-arrow" aria-hidden="true"></span></button>
+        <button class="sort-btn" data-sort="weight" aria-pressed="false">По весу<span class="sort-arrow" aria-hidden="true"></span></button>
+        <button class="sort-btn" data-sort="life" aria-pressed="false">По долголетию<span class="sort-arrow" aria-hidden="true"></span></button>
       </div>
     </div>
   </div>
@@ -226,6 +228,25 @@
     cards.forEach(c => grid.appendChild(c)); // переставляем в DOM
   }
 
+  // Какие стрелки показывать для каждого типа сортировки
+  function arrowFor(key, dir){
+    if(key === 'name'){
+      return dir === 1 ? 'А–Я' : 'Я–А';
+    }
+    return dir === 1 ? '↑' : '↓';
+  }
+
+  function updateArrows(activeBtn){
+    sortBtns.forEach(b => {
+      const arrow = b.querySelector('.sort-arrow');
+      if(b === activeBtn){
+        arrow.textContent = arrowFor(b.dataset.sort, sortDir);
+      } else {
+        arrow.textContent = '';
+      }
+    });
+  }
+
   sortBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.sort;
@@ -237,6 +258,7 @@
         sortDir = 1;
       }
       sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      updateArrows(btn);
       applySort(key);
     });
   });
