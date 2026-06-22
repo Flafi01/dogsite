@@ -142,6 +142,16 @@
         </div>
       </a>
 
+      <a class="catalog-card" href="belgian.html" data-name="Бельгийская овчарка" data-keywords="малинуа тервюрен грюнендаль лакенуа" data-weight="25" data-life="13">
+        <div class="catalog-photo"><img src="images/belgian-hero.jpg" alt="Бельгийская овчарка"></div>
+        <div class="catalog-body">
+          <h2>Бельгийская овчарка</h2>
+          <p class="catalog-tag">Умная, азартная, рабочая</p>
+          <p class="catalog-meta">20–30 кг · 56–66 см · 12–14 лет</p>
+          <span class="catalog-link">Смотреть карточку →</span>
+        </div>
+      </a>
+
     </div>
     <p class="catalog-empty is-hidden" id="catalog-empty">По вашему запросу пород не нашлось. Попробуйте изменить поиск.</p>
   </section>
@@ -191,12 +201,14 @@
     empty.classList.toggle('is-hidden', visible !== 0);
   }
 
-  // Живой поиск по названию
+  // Живой поиск по названию и скрытым ключевым словам (синонимам)
   function applySearch(){
     const q = search.value.trim().toLowerCase();
     cards.forEach(card => {
       const name = (card.dataset.name || '').toLowerCase();
-      card.classList.toggle('is-hidden', q && !name.includes(q));
+      const keywords = (card.dataset.keywords || '').toLowerCase();
+      const match = !q || name.includes(q) || keywords.includes(q);
+      card.classList.toggle('is-hidden', !match);
     });
     updateCount();
   }
