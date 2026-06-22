@@ -38,20 +38,26 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="breed.css">
 <style>
-/* ===== Врезка «Полезно знать» — без подложки, акцент только на иконке ===== */
+/* ===== Врезка «Полезно знать» — оформлена как карточка характеристики ===== */
 .fact-callout{
-  display:flex;gap:1rem;align-items:flex-start;
-  margin-top:2rem;max-width:760px;
+  display:flex;gap:1.1rem;align-items:flex-start;text-align:left;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-radius:16px;padding:1.3rem 1.5rem;box-shadow:var(--shadow);
+  max-width:760px;margin:1.1rem auto 0;
 }
 .fact-callout .callout-ico{
-  flex:0 0 auto;width:40px;height:40px;border-radius:10px;
-  background:rgba(242,201,160,.16);display:grid;place-items:center;
+  flex:0 0 auto;width:44px;height:44px;border-radius:12px;
+  background:rgba(200,116,58,.12);display:grid;place-items:center;
 }
-.fact-callout .callout-ico svg{width:22px;height:22px;stroke:#F2C9A0;fill:none;stroke-width:1.7}
-.fact-callout p{line-height:1.65;margin:0}
-/* На тёмной секции текст светлый, как у остального текста секции */
-.sec-dark .fact-callout p{color:rgba(255,255,255,.82)}
-.sec-dark .fact-callout strong{color:#fff;font-weight:600}
+.fact-callout .callout-ico svg{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.7}
+.fact-callout p{line-height:1.65;margin:0;color:var(--ink-soft)}
+.fact-callout strong{color:var(--ink);font-weight:600}
+/* На тёмной секции — как тёмные карточки характеристик */
+.sec-dark .fact-callout{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.sec-dark .fact-callout .callout-ico{background:rgba(242,201,160,.16)}
+.sec-dark .fact-callout .callout-ico svg{stroke:#F2C9A0}
+.sec-dark .fact-callout p{color:rgba(255,255,255,.78)}
+.sec-dark .fact-callout strong{color:#fff}
 </style>
 </head>
 <body>
