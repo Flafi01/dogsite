@@ -4,13 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Все породы — Атлас больших пород собак</title>
-<meta name="description" content="Полный каталог больших пород собак в атласе: сибирский хаски, аляскинский маламут, бернский зенненхунд.">
+<meta name="description" content="Полный каталог больших пород собак в атласе: сибирский хаски, аляскинский маламут, бернский зенненхунд, золотистый ретривер, немецкая овчарка.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="home.css">
 <link rel="stylesheet" href="catalog.css">
+<style>
+/* ===== Панель управления каталогом ===== */
+.catalog-controls{max-width:var(--content,1180px);margin:0 auto clamp(1.5rem,3vw,2.2rem);padding:0 var(--edge,clamp(20px,5vw,72px))}
+.catalog-toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
+.catalog-search{position:relative;flex:1 1 260px;max-width:380px}
+.catalog-search input{width:100%;padding:.8rem 1rem .8rem 2.7rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:1rem;color:var(--ink);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.catalog-search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(122,90,43,.12)}
+.catalog-search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--ink-soft);stroke-width:2;pointer-events:none}
+.catalog-sort{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.catalog-sort .sort-label{font-size:.9rem;color:var(--ink-soft);margin-right:.2rem}
+.sort-btn{padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:.92rem;color:var(--ink);cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
+.sort-btn:hover{border-color:var(--accent)}
+.sort-btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.catalog-count{max-width:var(--content,1180px);margin:0 auto 1.2rem;padding:0 var(--edge,clamp(20px,5vw,72px));font-size:.92rem;color:var(--ink-soft)}
+.catalog-card.is-hidden{display:none}
+.catalog-empty{max-width:var(--content,1180px);margin:0 auto;padding:2rem var(--edge,clamp(20px,5vw,72px));color:var(--ink-soft);font-size:1.05rem}
+.catalog-empty.is-hidden{display:none}
+@media (max-width:600px){
+  .catalog-toolbar{flex-direction:column;align-items:stretch}
+  .catalog-search{max-width:100%}
+}
+</style>
 </head>
 <body>
 
@@ -49,10 +71,28 @@
     </div>
   </section>
 
-  <section class="catalog-grid-section">
-    <div class="catalog-grid">
+  <!-- Панель управления: поиск + сортировка -->
+  <div class="catalog-controls">
+    <div class="catalog-toolbar">
+      <div class="catalog-search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="breed-search" placeholder="Поиск породы…" aria-label="Поиск породы по названию" autocomplete="off">
+      </div>
+      <div class="catalog-sort" role="group" aria-label="Сортировка пород">
+        <span class="sort-label">Сортировать:</span>
+        <button class="sort-btn" data-sort="name" aria-pressed="false">По алфавиту</button>
+        <button class="sort-btn" data-sort="weight" aria-pressed="false">По весу</button>
+        <button class="sort-btn" data-sort="life" aria-pressed="false">По долголетию</button>
+      </div>
+    </div>
+  </div>
 
-      <a class="catalog-card" href="husky.html">
+  <p class="catalog-count" id="catalog-count" aria-live="polite"></p>
+
+  <section class="catalog-grid-section">
+    <div class="catalog-grid" id="catalog-grid">
+
+      <a class="catalog-card" href="husky.html" data-name="Сибирский хаски" data-weight="24.5" data-life="13.5">
         <div class="catalog-photo"><img src="images/husky-hero.jpg" alt="Сибирский хаски"></div>
         <div class="catalog-body">
           <h2>Сибирский хаски</h2>
@@ -62,7 +102,7 @@
         </div>
       </a>
 
-      <a class="catalog-card" href="malamute.html">
+      <a class="catalog-card" href="malamute.html" data-name="Аляскинский маламут" data-weight="39.5" data-life="12">
         <div class="catalog-photo"><img src="images/malamute-hero.jpg" alt="Аляскинский маламут"></div>
         <div class="catalog-body">
           <h2>Аляскинский маламут</h2>
@@ -72,7 +112,7 @@
         </div>
       </a>
 
-      <a class="catalog-card" href="bernese.html">
+      <a class="catalog-card" href="bernese.html" data-name="Бернский зенненхунд" data-weight="44" data-life="9">
         <div class="catalog-photo"><img src="images/bernese-hero.jpg" alt="Бернский зенненхунд"></div>
         <div class="catalog-body">
           <h2>Бернский зенненхунд</h2>
@@ -82,7 +122,7 @@
         </div>
       </a>
 
-      <a class="catalog-card" href="golden.html">
+      <a class="catalog-card" href="golden.html" data-name="Золотистый ретривер" data-weight="31.5" data-life="11">
         <div class="catalog-photo"><img src="images/golden-hero.jpg" alt="Золотистый ретривер"></div>
         <div class="catalog-body">
           <h2>Золотистый ретривер</h2>
@@ -92,7 +132,7 @@
         </div>
       </a>
 
-      <a class="catalog-card" href="shepherd.html">
+      <a class="catalog-card" href="shepherd.html" data-name="Немецкая овчарка" data-weight="31" data-life="11">
         <div class="catalog-photo"><img src="images/shepherd-hero.jpg" alt="Немецкая овчарка"></div>
         <div class="catalog-body">
           <h2>Немецкая овчарка</h2>
@@ -103,6 +143,7 @@
       </a>
 
     </div>
+    <p class="catalog-empty is-hidden" id="catalog-empty">По вашему запросу пород не нашлось. Попробуйте изменить поиск.</p>
   </section>
 
 </main>
@@ -124,5 +165,75 @@
 </footer>
 
 <script src="script.js"></script>
+<script>
+/* ===== Каталог: поиск, сортировка, счётчик ===== */
+(function(){
+  const grid   = document.getElementById('catalog-grid');
+  const search = document.getElementById('breed-search');
+  const count  = document.getElementById('catalog-count');
+  const empty  = document.getElementById('catalog-empty');
+  const sortBtns = document.querySelectorAll('.sort-btn');
+  if(!grid) return;
+
+  const cards = Array.from(grid.querySelectorAll('.catalog-card'));
+  const total = cards.length;
+  let currentSort = null;
+  let sortDir = 1; // 1 — по возрастанию, -1 — по убыванию
+
+  // Обновляет счётчик и сообщение «ничего не найдено»
+  function updateCount(){
+    const visible = cards.filter(c => !c.classList.contains('is-hidden')).length;
+    if(visible === total){
+      count.textContent = 'Показаны все породы: ' + total;
+    } else {
+      count.textContent = 'Показано пород: ' + visible + ' из ' + total;
+    }
+    empty.classList.toggle('is-hidden', visible !== 0);
+  }
+
+  // Живой поиск по названию
+  function applySearch(){
+    const q = search.value.trim().toLowerCase();
+    cards.forEach(card => {
+      const name = (card.dataset.name || '').toLowerCase();
+      card.classList.toggle('is-hidden', q && !name.includes(q));
+    });
+    updateCount();
+  }
+
+  // Сортировка карточек
+  function applySort(key){
+    cards.sort((a, b) => {
+      if(key === 'name'){
+        return a.dataset.name.localeCompare(b.dataset.name, 'ru') * sortDir;
+      }
+      const av = parseFloat(a.dataset[key]) || 0;
+      const bv = parseFloat(b.dataset[key]) || 0;
+      return (av - bv) * sortDir;
+    });
+    cards.forEach(c => grid.appendChild(c)); // переставляем в DOM
+  }
+
+  sortBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.dataset.sort;
+      // повторный клик по той же кнопке — меняем направление
+      if(currentSort === key){
+        sortDir *= -1;
+      } else {
+        currentSort = key;
+        sortDir = 1;
+      }
+      sortBtns.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      applySort(key);
+    });
+  });
+
+  search.addEventListener('input', applySearch);
+
+  // стартовый счётчик
+  updateCount();
+})();
+</script>
 </body>
 </html>
