@@ -15,10 +15,10 @@
 /* ===== Панель управления каталогом ===== */
 .catalog-controls{max-width:var(--content,1180px);margin:0 auto clamp(1.5rem,3vw,2.2rem);padding:0 var(--edge,clamp(20px,5vw,72px))}
 .catalog-toolbar{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between}
-.catalog-search{position:relative;flex:1 1 260px;max-width:380px}
-.catalog-search input{width:100%;padding:.8rem 1rem .8rem 2.7rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:1rem;color:var(--ink);transition:border-color .2s var(--ease),box-shadow .2s var(--ease)}
+.catalog-search{position:relative;flex:1 1 260px;max-width:380px;display:block}
+.catalog-search input{width:100%;padding:.8rem 1rem .8rem 2.7rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:1rem;color:var(--ink);transition:border-color .2s var(--ease),box-shadow .2s var(--ease);-webkit-appearance:none;appearance:none}
 .catalog-search input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(122,90,43,.12)}
-.catalog-search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--ink-soft);stroke-width:2;pointer-events:none}
+.catalog-search svg{position:absolute;left:1rem;top:50%;transform:translateY(-50%);width:18px;height:18px;fill:none;stroke:var(--ink-soft);stroke-width:2;pointer-events:none;z-index:1}
 .catalog-sort{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
 .catalog-sort .sort-label{font-size:.9rem;color:var(--ink-soft);margin-right:.2rem}
 .sort-btn{padding:.5rem 1rem;border:1px solid var(--line);border-radius:999px;background:var(--bg-card);font-family:inherit;font-size:.92rem;color:var(--ink);cursor:pointer;transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease)}
