@@ -33,13 +33,14 @@
   const photo    = document.getElementById('coat-photo');
   const dog      = document.querySelector('.coat-preview [class*="dog-"]');
   const nameEl   = document.getElementById('coat-name');
+  const breedName = document.querySelector('.breed-hero h1')?.textContent.trim() || 'Собака';
   if(!swatches.length || (!photo && !dog)) return;
 
   function setCoat(btn){
     // Режим реальных фото
     if(photo && btn.dataset.photo){
       photo.src = btn.dataset.photo;
-      photo.alt = 'Аляскинский маламут окраса «' + (btn.dataset.name || '') + '»';
+      photo.alt = breedName + ' окраса «' + (btn.dataset.name || '') + '»';
     }
     // Режим перекраски иллюстрации (хаски, бернский)
     if(dog && btn.dataset.coat){
