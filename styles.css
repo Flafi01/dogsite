@@ -20,6 +20,29 @@
   --ease:      cubic-bezier(.22,.61,.36,1);
 }
 
+/* =========================================================
+   ТЁМНАЯ ТЕМА «в тон» — тёплая сумеречная палитра
+   Активируется через [data-theme="dark"] на <html>
+   ========================================================= */
+[data-theme="dark"]{
+  --bg:        #17140F;   /* тёплый тёмный фон, не чистый чёрный */
+  --bg-card:   #221E18;   /* карточки чуть светлее фона */
+  --ink:       #EAE3D6;   /* мягкий тёплый кремовый текст */
+  --ink-soft:  #A39A8A;   /* приглушённый текст */
+  --accent:    #DB8A50;   /* терракота, осветлённая для тёмного фона */
+  --accent-dk: #C8743A;
+  --moss:      #8B9B80;   /* мох, чуть светлее для читаемости */
+  --line:      #332E26;   /* тёмные малозаметные линии */
+  --shadow:    0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.35);
+  --shadow-lg: 0 2px 4px rgba(0,0,0,.35), 0 18px 50px rgba(0,0,0,.5);
+}
+/* Плавный переход при переключении темы */
+html{transition:background-color .4s var(--ease)}
+body, .site-header, .breed-section, .catalog-card, .spec-item, .health-card{
+  transition:background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+}
+
+
 *{box-sizing:border-box;margin:0;padding:0}
 
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -350,3 +373,26 @@ a{color:inherit;text-decoration:none}
 /* Статичный «свотч» окраса берна (не кнопка) */
 .swatch-static{cursor:default}
 .swatch-static .swatch-chip{border-color:var(--accent);box-shadow:inset 0 -6px 12px rgba(0,0,0,.18),0 0 0 3px rgba(200,116,58,.25)}
+
+/* =========================================================
+   КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ (солнце / луна)
+   ========================================================= */
+.theme-toggle{
+  display:grid;place-items:center;
+  width:42px;height:42px;border-radius:50%;
+  background:transparent;border:1px solid var(--line);
+  color:var(--ink);cursor:pointer;
+  transition:background .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);
+  margin-left:.5rem;
+}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent)}
+.theme-toggle svg{display:block}
+/* По умолчанию (светлая тема) показываем луну (предложение уйти в тёмную) */
+.theme-toggle .icon-moon{display:block}
+.theme-toggle .icon-sun{display:none}
+/* В тёмной теме показываем солнце (предложение вернуться в светлую) */
+[data-theme="dark"] .theme-toggle .icon-moon{display:none}
+[data-theme="dark"] .theme-toggle .icon-sun{display:block}
+/* На главной кнопка в прозрачной шапке поверх фото — белая */
+.home .site-header-overlay .theme-toggle{color:#fff;border-color:rgba(255,255,255,.4)}
+.home .site-header-overlay .theme-toggle:hover{color:var(--accent);border-color:var(--accent)}
