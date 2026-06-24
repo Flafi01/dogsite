@@ -5,13 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Атлас больших пород собак</title>
 <meta name="description" content="Атлас больших пород собак: характер, повадки, здоровье и окрасы. Подробные карточки хаски, маламута и бернского зенненхунда, чтобы узнать породу заранее.">
-<link rel="canonical" href="https://bigdogatlas.com/">
 
 <meta property="og:title" content="Атлас больших пород собак">
 <meta property="og:description" content="Характер, повадки, здоровье и окрасы больших пород. Узнайте собаку до того, как она появится в доме.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://bigdogatlas.com/">
-<meta property="og:image" content="https://bigdogatlas.com/images/hero-1.jpg">
 
 <script type="application/ld+json">
 {
@@ -28,6 +25,23 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="home.css">
+<style>
+/* Мобильное меню на главной при раскрытии: гарантируем читаемость.
+   Фон уже задаёт styles.css (var(--bg)), но home.css красит текст белым
+   для hero — перебиваем его тёмным, когда меню открыто. */
+@media (max-width:768px){
+  .home .site-header-overlay .nav-links.open{
+    background:var(--bg);
+  }
+  .home .site-header-overlay .nav-links.open a,
+  .home .site-header-overlay.is-stuck .nav-links.open a{
+    color:var(--ink);
+  }
+  .home .site-header-overlay .nav-links.open a:hover{
+    color:var(--accent);
+  }
+}
+</style>
 </head>
 <body class="home">
 
@@ -47,7 +61,7 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="#breeds">Породы</a></li>
+      <li><a href="breeds.html">Породы</a></li>
       <li><a href="#how">Путь по карточке</a></li>
       <li><a href="#about">От автора</a></li>
     </ul>
@@ -60,8 +74,8 @@
   <section class="hero-full" aria-label="Большие породы собак">
     <div class="hero-slides">
       <div class="hero-slide active" style="background-image:url('images/hero-1.jpg')"></div>
-      <div class="hero-slide" data-bg="images/hero-2.jpg"></div>
-      <div class="hero-slide" data-bg="images/hero-3.jpg"></div>
+      <div class="hero-slide" style="background-image:url('images/hero-2.jpg')"></div>
+      <div class="hero-slide" style="background-image:url('images/hero-3.jpg')"></div>
     </div>
     <div class="hero-content">
       <h1>Большие собаки, и&nbsp;как их по-настоящему <em>понять</em></h1>
@@ -88,28 +102,28 @@
       <h2 class="home-h2" data-reveal>Породы</h2>
       <div class="breed-cards">
         <a class="breed-photo-card" href="husky.html" data-reveal>
-          <img src="images/husky-hero.jpg" alt="Сибирский хаски" loading="lazy">
+          <img src="images/husky-hero.jpg" alt="Сибирский хаски">
           <span class="breed-card-body">
             <h3>Сибирский хаски</h3>
             <span>Выносливый, дружелюбный, говорливый</span>
           </span>
         </a>
         <a class="breed-photo-card" href="malamute.html" data-reveal>
-          <img src="images/malamute-hero.jpg" alt="Аляскинский маламут" loading="lazy">
+          <img src="images/malamute-hero.jpg" alt="Аляскинский маламут">
           <span class="breed-card-body">
             <h3>Аляскинский маламут</h3>
             <span>Мощный, ласковый, упрямый</span>
           </span>
         </a>
         <a class="breed-photo-card" href="bernese.html" data-reveal>
-          <img src="images/bernese-hero.jpg" alt="Бернский зенненхунд" loading="lazy">
+          <img src="images/bernese-hero.jpg" alt="Бернский зенненхунд">
           <span class="breed-card-body">
             <h3>Бернский зенненхунд</h3>
             <span>Добрый, спокойный, семейный</span>
           </span>
         </a>
         <a class="breed-photo-card" href="golden.html" data-reveal>
-          <img src="images/golden-hero.jpg" alt="Золотистый ретривер" loading="lazy">
+          <img src="images/golden-hero.jpg" alt="Золотистый ретривер">
           <span class="breed-card-body">
             <h3>Золотистый ретривер</h3>
             <span>Добродушный, преданный, улыбчивый</span>
@@ -163,7 +177,7 @@
       <p class="footer-note">Справочный проект о больших собаках. Информация носит ознакомительный характер и не заменяет консультацию ветеринара.</p>
     </div>
     <nav aria-label="Подвал">
-      <a href="#breeds">Породы</a>
+      <a href="breeds.html">Породы</a>
       <a href="#how">Путь по карточке</a>
       <a href="#about">От автора</a>
       <a href="#top">Наверх ↑</a>
@@ -182,10 +196,6 @@
   let i = 0, timer;
   function show(n){
     i = (n + slides.length) % slides.length;
-    const slide = slides[i];
-    if(slide.dataset.bg && !slide.style.backgroundImage){
-      slide.style.backgroundImage = `url('${slide.dataset.bg}')`;
-    }
     slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
     dots.forEach((d,idx)=>d.classList.toggle('active', idx===i));
   }
