@@ -54,9 +54,6 @@
 .related-card p{font-size:.9rem;color:var(--ink-soft);margin:0}
 @media (max-width:600px){.related-grid{grid-template-columns:1fr}}
 </style>
-<script>
-(function(){try{var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}})();
-</script>
 </head>
 <body>
 
@@ -70,10 +67,6 @@
       </span>
       <span class="brand-text">Атлас&nbsp;больших&nbsp;пород</span>
     </a>
-    <button class="theme-toggle" aria-label="Переключить тему" title="Светлая / тёмная тема">
-  <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19"/></svg>
-  <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>
-</button>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Открыть меню"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
       <li><a href="breeds.html">Породы</a></li>
@@ -210,16 +203,5 @@
 </footer>
 
 <script src="script.js"></script>
-<script>
-(function(){
-  var btn=document.querySelector('.theme-toggle');
-  if(!btn)return;
-  btn.addEventListener('click',function(){
-    var isDark=document.documentElement.getAttribute('data-theme')==='dark';
-    if(isDark){document.documentElement.removeAttribute('data-theme');try{localStorage.setItem('theme','light');}catch(e){}}
-    else{document.documentElement.setAttribute('data-theme','dark');try{localStorage.setItem('theme','dark');}catch(e){}}
-  });
-})();
-</script>
 </body>
 </html>

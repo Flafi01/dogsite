@@ -198,20 +198,3 @@
 .breed-premium .breed-portrait:hover img{
   transform:scale(1.03);
 }
-
-/* =========================================================
-   ТЁМНАЯ ТЕМА — поправки для секций страниц пород
-   ========================================================= */
-/* sec-dark в светлой теме тёмная для контраста; в тёмной теме
-   делаем её чуть СВЕТЛЕЕ фона, иначе сольётся */
-[data-theme="dark"] .breed-premium .sec-dark{background:#1F2A22}
-[data-theme="dark"] .breed-premium .sec-dark h2{color:#fff}
-[data-theme="dark"] .breed-premium .sec-dark p{color:rgba(255,255,255,.82)}
-[data-theme="dark"] .breed-premium .sec-dark .spec-item{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.10)}
-[data-theme="dark"] .breed-premium .sec-dark .spec-item h3{color:#fff}
-[data-theme="dark"] .breed-premium .sec-dark .spec-item p{color:rgba(255,255,255,.78)}
-/* sec-card в тёмной теме — тоже чуть светлее основного фона */
-[data-theme="dark"] .breed-premium .sec-card{background:#1C1813}
-/* Тёмная лента фактов остаётся тёмной, но подгоним под фон */
-[data-theme="dark"] .breed-premium .facts-band{background:#0F0D0A}
-/* Врезка-карточка «полезно знать» уже наследует spec-item, отдельно не трогаем */
