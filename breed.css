@@ -6,6 +6,17 @@
 
 :root{ --edge: clamp(20px, 5vw, 72px); --content: 1180px; }
 
+/* =========================================================
+   ОТСТУП ПОД ЛИПКУЮ ШАПКУ
+   Чтобы секции и их интерактивные элементы (вкладки, окрасы)
+   не прятались под закреплённую шапку при прокрутке к ним.
+   ========================================================= */
+.breed-premium .breed-section,
+.breed-premium .breed-hero,
+.variety-tabs{
+  scroll-margin-top:90px;
+}
+
 /* Страница на всю ширину, внутренние секции сами центрируют контент */
 .breed-page.breed-premium{max-width:none;padding-inline:0;overflow-x:hidden}
 
@@ -149,3 +160,41 @@
 }
 .breed-premium .puppy-carousel .carousel-prev{left:16px}
 .breed-premium .puppy-carousel .carousel-next{right:16px}
+
+/* =========================================================
+   МИКРО-АНИМАЦИИ (деликатные штрихи при наведении)
+   ========================================================= */
+/* Карточки характеристик и здоровья слегка приподнимаются */
+.breed-premium .spec-item,
+.breed-premium .health-card{
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease);
+}
+.breed-premium .spec-item:hover,
+.breed-premium .health-card:hover{
+  transform:translateY(-3px);
+  box-shadow:var(--shadow-lg);
+}
+/* Иконки внутри карточек мягко увеличиваются */
+.breed-premium .spec-icon,
+.breed-premium .health-ico{
+  transition:transform .25s var(--ease);
+}
+.breed-premium .spec-item:hover .spec-icon,
+.breed-premium .health-card:hover .health-ico{
+  transform:scale(1.08);
+}
+/* Кнопки окрасов чуть подрастают при наведении */
+.breed-premium .swatch{
+  transition:transform .2s var(--ease);
+}
+.breed-premium .swatch:hover{
+  transform:translateY(-2px);
+}
+/* Портрет породы: очень мягкое приближение при наведении */
+.breed-premium .breed-portrait{overflow:hidden}
+.breed-premium .breed-portrait img{
+  transition:transform .6s var(--ease);
+}
+.breed-premium .breed-portrait:hover img{
+  transform:scale(1.03);
+}

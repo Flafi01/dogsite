@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<meta property="og:image" content="https://bigdogatlas.com/images/og-image.jpg">
+<meta property="og:url" content="https://bigdogatlas.com/">
+<meta name="twitter:card" content="summary_large_image">
 <title>Золотистый ретривер — Атлас больших пород собак</title>
 <meta name="description" content="Золотистый ретривер: характер, повадки, здоровье и окрасы. Подробная карточка породы с реальными фото в атласе больших пород собак.">
 
@@ -38,6 +43,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="breed.css">
+<style>
+/* Блок «Похожие породы» */
+.related-breeds{max-width:var(--content,1180px);margin:0 auto;padding:clamp(2rem,5vw,3.5rem) var(--edge,clamp(20px,5vw,72px)) 0}
+.related-breeds h2{font-family:'Fraunces',serif;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:1.4rem;text-align:center}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;max-width:760px;margin-inline:auto}
+.related-card{display:block;background:var(--bg-card);border:1px solid var(--line);border-radius:14px;padding:1.2rem 1.4rem;box-shadow:var(--shadow);transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.related-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+.related-card h3{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:.3rem;color:var(--ink)}
+.related-card p{font-size:.9rem;color:var(--ink-soft);margin:0}
+@media (max-width:600px){.related-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
 
@@ -53,7 +69,7 @@
     </a>
     <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Открыть меню"><span></span><span></span><span></span></button>
     <ul class="nav-links" id="nav-links">
-      <li><a href="index.html#breeds">Породы</a></li>
+      <li><a href="breeds.html">Породы</a></li>
       <li><a href="index.html#how">Как читать карточку</a></li>
       <li><a href="index.html#about">О проекте</a></li>
     </ul>
@@ -63,7 +79,7 @@
 <main id="main" class="breed-page breed-centered breed-premium">
 
   <nav class="crumbs" aria-label="Хлебные крошки">
-    <a href="index.html">Атлас</a><span>/</span><a href="index.html#breeds">Породы</a><span>/</span> Золотистый ретривер
+    <a href="index.html">Атлас</a><span>/</span><a href="breeds.html">Породы</a><span>/</span> Золотистый ретривер
   </nav>
 
   <!-- Заголовок -->
@@ -166,6 +182,11 @@
   </section>
 
   <!-- Навигация между породами -->
+  <section class="related-breeds" aria-label="Похожие породы">
+    <h2>Похожие породы</h2>
+    <div class="related-grid"><a class="related-card" href="labrador.html"><h3>Лабрадор-ретривер</h3><p>Близкий родственник-ретривер</p></a><a class="related-card" href="bernese.html"><h3>Бернский зенненхунд</h3><p>Тоже ласковая семейная порода</p></a></div>
+  </section>
+
   <nav class="breed-nav" aria-label="Другие породы">
     <a href="bernese.html"><small>← Предыдущая</small>Бернский зенненхунд</a>
     <a href="husky.html"><small>Следующая →</small>Сибирский хаски</a>
@@ -180,7 +201,7 @@
       <p class="footer-note">Справочный проект о больших собаках. Информация носит ознакомительный характер и не заменяет консультацию ветеринара.</p>
     </div>
     <nav aria-label="Подвал">
-      <a href="index.html#breeds">Породы</a>
+      <a href="breeds.html">Породы</a>
       <a href="index.html#how">Путь по карточке</a>
       <a href="index.html#about">От автора</a>
       <a href="#top">Наверх ↑</a>
