@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Атлас больших пород</title>
+<link rel="icon" type="image/png" href="images/paw-favicon-64.png">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --base:#1E2122;--base-2:#141617;
+  --text:#E8EDE3;--text-soft:#A7B0A4;--sage:#9DB088;--brown:#8C6239;
+  --line:rgba(232,237,227,.12);
+  --c-money:#8B9B5E;--c-time:#5E8B86;--c-work:#B07D4A;--c-health:#9DB088;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Onest',sans-serif;color:var(--text);background:var(--base);overflow-x:hidden}
+
+/* фон фиксирован, не влияет на поток */
+#bg{position:fixed;inset:0;z-index:0;pointer-events:none;display:block}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.045;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* весь контент над фоном */
+.page{position:relative;z-index:2}
+
+/* ШАПКА */
+.top{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:1.4rem clamp(1.5rem,5vw,4rem);background:linear-gradient(rgba(30,33,34,.75),transparent)}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:700;font-size:1.1rem}
+.brand img{width:30px;height:30px;display:block}
+.nav{display:flex;gap:2rem;align-items:center}
+.nav a{color:var(--text-soft);text-decoration:none;font-size:.95rem;font-weight:500;transition:color .25s}
+.nav a:hover{color:var(--text)}
+.nav .test-btn{background:var(--sage);color:#141617;padding:.55rem 1.3rem;border-radius:100px;font-weight:700}
+@media(max-width:820px){.nav a:not(.test-btn){display:none}}
+
+/* ЭКРАН 1 */
+.hero{min-height:100vh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(2rem,5vw,5rem);padding:7rem clamp(1.5rem,5vw,4.5rem) 4rem;max-width:1340px;margin:0 auto}
+@media(max-width:820px){.hero{grid-template-columns:1fr;text-align:center;padding-top:6rem;gap:3rem}}
+.hero-text h1{font-size:clamp(2.3rem,4.6vw,4.3rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:2.2rem;max-width:16ch}
+@media(max-width:820px){.hero-text h1{margin-inline:auto}}
+.hero-text h1 .accent{color:var(--sage)}
+.actions{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+@media(max-width:820px){.actions{justify-content:center}}
+.btn{background:var(--sage);color:#141617;font-family:inherit;font-size:1rem;font-weight:700;padding:1rem 2.1rem;border:none;border-radius:100px;cursor:pointer;display:inline-flex;gap:.6rem;align-items:center;transition:transform .25s,box-shadow .25s;text-decoration:none}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.btn .arr{transition:transform .25s}.btn:hover .arr{transform:translateX(4px)}
+
+.hero-right{display:flex;flex-direction:column;align-items:center;gap:1.8rem}
+.breed-rotator{position:relative;width:min(100%,380px);aspect-ratio:5/6.55}
+.breed-card{position:absolute;inset:0;display:block;text-decoration:none;color:inherit;border-radius:24px;overflow:hidden;background:rgba(232,237,227,.04);border:1px solid var(--line);box-shadow:0 30px 60px rgba(0,0,0,.35);opacity:0;transform:scale(.99);pointer-events:none;transition:opacity .8s ease,transform .8s ease}
+.breed-card.active{opacity:1;transform:scale(1);pointer-events:auto}
+.breed-card img{width:100%;display:block;aspect-ratio:5/6;object-fit:cover;transition:transform .5s}
+.breed-card:hover img{transform:scale(1.04)}
+.breed-card .cap{position:absolute;left:0;right:0;bottom:0;padding:1.4rem;background:linear-gradient(transparent,rgba(20,22,23,.88));display:flex;justify-content:space-between;align-items:flex-end}
+.breed-card .cap .nm{font-size:1.4rem;font-weight:800}
+.breed-card .cap .mt{font-size:.85rem;color:var(--text-soft);margin-top:.2rem}
+.breed-card .badge{position:absolute;top:1rem;left:1rem;background:rgba(20,22,23,.6);backdrop-filter:blur(8px);border:1px solid var(--line);padding:.4rem .9rem;border-radius:100px;font-size:.78rem;font-weight:600;color:var(--sage)}
+.breed-card .arrow{width:42px;height:42px;border-radius:50%;background:var(--sage);color:#141617;display:grid;place-items:center;font-size:1.1rem;flex-shrink:0;transition:transform .3s}
+.breed-card:hover .arrow{transform:translateX(4px)}
+
+.facts{position:relative;width:380px;max-width:100%;height:74px;text-align:center}
+.fact{position:absolute;inset:0;opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease;display:flex;flex-direction:column;justify-content:center;pointer-events:none}
+.fact.active{opacity:1;transform:translateY(0)}
+.fact.leaving{opacity:0;transform:translateY(-16px)}
+.fact .num{font-size:2rem;font-weight:800;color:var(--text);line-height:1;letter-spacing:-.02em}
+.fact .lbl{font-size:.85rem;color:var(--text-soft);margin-top:.35rem}
+
+.scroll-hint{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:var(--text-soft);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.scroll-hint .line{width:1px;height:28px;background:linear-gradient(var(--sage),transparent);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+@media(max-width:820px){.scroll-hint{display:none}}
+
+/* ЭКРАН 2 */
+.screen2{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem clamp(1.5rem,5vw,4rem)}
+.s2-inner{width:100%;max-width:1180px;display:flex;flex-direction:column;gap:2.4rem;align-items:center}
+.s2-head{display:flex;flex-direction:column;align-items:center;gap:.5rem;width:100%;max-width:760px}
+.s2-title{font-size:clamp(1.6rem,2.8vw,2.4rem);font-weight:700;letter-spacing:-.02em;color:var(--text);text-align:center}
+.s2-wave{width:100%;height:14px;color:var(--sage);opacity:.75}
+.s2-wave svg{width:100%;height:100%;display:block}
+.grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:1.6rem;width:100%;aspect-ratio:1.5/1;max-height:74vh}
+@media(max-width:700px){.grid{grid-template-columns:1fr;grid-template-rows:repeat(4,auto);aspect-ratio:auto;max-height:none;gap:1rem}}
+
+.block{position:relative;border-radius:22px;padding:1.8rem;cursor:pointer;overflow:hidden;border:1px solid var(--line);background:rgba(255,255,255,.03);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);display:flex;flex-direction:column;
+  opacity:0;transform:translateY(24px);transition:transform .45s cubic-bezier(.22,.61,.36,1),border-color .4s,background .4s}
+.block.shown{opacity:1;transform:translateY(0)}
+/* цветной подтон каждого блока (статичный, не мерцает) */
+.block .tint{position:absolute;inset:0;opacity:.14;pointer-events:none;background:radial-gradient(circle at 28% 18%, var(--bc), transparent 68%);transition:opacity .4s}
+.block:hover{border-color:var(--bc);background:rgba(255,255,255,.05);transform:translateY(-6px)}
+.block:hover .tint{opacity:.3}
+.b-money{--bc:var(--c-money)}.b-time{--bc:var(--c-time)}.b-work{--bc:var(--c-work)}.b-health{--bc:var(--c-health)}
+.block .head{display:flex;align-items:center;gap:.8rem;position:relative;z-index:2}
+.block .ico{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;border-radius:11px;background:rgba(255,255,255,.06);color:var(--bc)}
+.block .ico svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7}
+.block h3{font-size:1.35rem;font-weight:700;letter-spacing:-.01em}
+.block .list{position:relative;z-index:2;margin-top:1.1rem;list-style:none;display:flex;flex-direction:column;gap:.6rem;opacity:0;transform:translateY(10px);transition:opacity .45s ease .05s,transform .45s ease .05s;max-height:0;overflow:hidden}
+.block:hover .list{opacity:1;transform:translateY(0);max-height:320px}
+.block .list li{font-size:.97rem;line-height:1.45;color:#D4DBCE;padding-left:1rem;position:relative}
+.block .list li::before{content:"";position:absolute;left:0;top:.55em;width:5px;height:5px;border-radius:50%;background:var(--bc)}
+.block .list li b{color:var(--text);font-weight:600}
+.block .more{position:absolute;bottom:1.4rem;right:1.6rem;z-index:2;display:flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:600;color:var(--bc);opacity:0;transform:translateX(-6px);transition:opacity .4s,transform .4s}
+.block:hover .more{opacity:1;transform:translateX(0)}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="grain"></div>
+
+<div class="page">
+<header class="top">
+  <div class="brand"><img src="images/paw-favicon.png" alt=""> Атлас больших пород</div>
+  <nav class="nav">
+    <a href="breeds.html">Породы</a>
+    <a href="#">Расходы</a>
+    <a href="#">Здоровье</a>
+    <a href="#" class="test-btn">Тест</a>
+  </nav>
+</header>
+
+<!-- ЭКРАН 1 -->
+<section class="hero">
+  <div class="hero-text">
+    <h1>Большая собака потребует от тебя <span class="accent">гораздо больше</span>, чем ты ожидаешь.</h1>
+    <div class="actions">
+      <a class="btn" href="#">Пройти тест <span class="arr">→</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="breed-rotator" id="rotator">
+      <a class="breed-card active" href="husky.html"><span class="badge">Порода</span><img src="images/husky-hero.jpg" alt="Сибирский хаски"><div class="cap"><div><div class="nm">Сибирский хаски</div><div class="mt">21–28 кг · 12–15 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="malamute.html"><span class="badge">Порода</span><img src="images/malamute-hero.jpg" alt="Аляскинский маламут"><div class="cap"><div><div class="nm">Аляскинский маламут</div><div class="mt">36–43 кг · 10–14 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="bernese.html"><span class="badge">Порода</span><img src="images/bernese-hero.jpg" alt="Бернский зенненхунд"><div class="cap"><div><div class="nm">Бернский зенненхунд</div><div class="mt">38–50 кг · 8–10 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="golden.html"><span class="badge">Порода</span><img src="images/golden-hero.jpg" alt="Золотистый ретривер"><div class="cap"><div><div class="nm">Золотистый ретривер</div><div class="mt">29–34 кг · 10–12 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="shepherd.html"><span class="badge">Порода</span><img src="images/shepherd-hero.jpg" alt="Немецкая овчарка"><div class="cap"><div><div class="nm">Немецкая овчарка</div><div class="mt">22–40 кг · 9–13 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="belgian.html"><span class="badge">Порода</span><img src="images/belgian-hero.jpg" alt="Бельгийская овчарка"><div class="cap"><div><div class="nm">Бельгийская овчарка</div><div class="mt">20–30 кг · 12–14 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="labrador.html"><span class="badge">Порода</span><img src="images/labrador-hero.jpg" alt="Лабрадор-ретривер"><div class="cap"><div><div class="nm">Лабрадор-ретривер</div><div class="mt">25–36 кг · 10–14 лет</div></div><div class="arrow">→</div></div></a>
+      <a class="breed-card" href="dog.html"><span class="badge">Порода</span><img src="images/dog-hero.jpg" alt="Немецкий дог"><div class="cap"><div><div class="nm">Немецкий дог</div><div class="mt">50–90 кг · 7–8 лет</div></div><div class="arrow">→</div></div></a>
+    </div>
+    <div class="facts" id="facts">
+      <div class="fact"><div class="num">от 2 часов</div><div class="lbl">прогулок каждый день</div></div>
+      <div class="fact"><div class="num">~15 кг</div><div class="lbl">корма в месяц</div></div>
+      <div class="fact"><div class="num">от 40 кг</div><div class="lbl">на поводке</div></div>
+      <div class="fact"><div class="num">8–12 лет</div><div class="lbl">вместе</div></div>
+      <div class="fact"><div class="num">каждый день</div><div class="lbl">без выходных</div></div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>листай</span><span class="line"></span></div>
+</section>
+
+<!-- ЭКРАН 2 -->
+<section class="screen2">
+  <div class="s2-inner">
+    <div class="s2-head">
+      <p class="s2-title">Четыре стороны одной ответственности</p>
+      <span class="s2-wave"><svg viewBox="0 0 400 14" fill="none" preserveAspectRatio="none"><path d="M0 7 Q12.5 0 25 7 T50 7 T75 7 T100 7 T125 7 T150 7 T175 7 T200 7 T225 7 T250 7 T275 7 T300 7 T325 7 T350 7 T375 7 T400 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+    </div>
+    <div class="grid">
+      <div class="block b-money"><span class="tint"></span>
+        <div class="head"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5c0-1 1-1.5 2.5-1.5s2.5.7 2.5 1.8c0 2.2-5 1.2-5 3.4 0 1.1 1 1.8 2.5 1.8s2.5-.5 2.5-1.5"/></svg></span><h3>Деньги</h3></div>
+        <ul class="list">
+          <li>Корм для крупной породы: <b>от 6 000 ₽ в месяц</b></li>
+          <li>Обработка от клещей и блох: <b>от 8 000 ₽ за сезон</b></li>
+          <li>Прививки: <b>от 4 000 ₽ в год</b></li>
+          <li>Плановый осмотр и анализы: <b>около 10 000 ₽ в год</b></li>
+          <li>Амуниция, лежак, миски: <b>от 5 000 ₽</b></li>
+        </ul>
+        <span class="more">Подробнее <span>→</span></span>
+      </div>
+      <div class="block b-time"><span class="tint"></span>
+        <div class="head"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><h3>Время</h3></div>
+        <ul class="list">
+          <li>Прогулки: <b>от 2 часов каждый день</b></li>
+          <li>Игры и нагрузка: <b>не меньше часа в день</b></li>
+          <li>Уход за шерстью: <b>несколько раз в неделю</b></li>
+          <li>Дрессировка: <b>регулярно весь первый год</b></li>
+        </ul>
+        <span class="more">Подробнее <span>→</span></span>
+      </div>
+      <div class="block b-work"><span class="tint"></span>
+        <div class="head"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 20v-5a8 8 0 0116 0v5"/><path d="M2 20h20M12 3v2"/></svg></span><h3>Труд</h3></div>
+        <ul class="list">
+          <li>Вес взрослой собаки: <b>от 40 кг</b></li>
+          <li>Мытьё лап: <b>после каждой прогулки</b></li>
+          <li>Линька: <b>сезонная, обильная</b></li>
+          <li>Купание: <b>раз в 1–2 месяца</b></li>
+        </ul>
+        <span class="more">Подробнее <span>→</span></span>
+      </div>
+      <div class="block b-health"><span class="tint"></span>
+        <div class="head"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.5A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></span><h3>Здоровье</h3></div>
+        <ul class="list">
+          <li>Крупные породы склонны к дисплазии суставов</li>
+          <li>У гигантов часто бывают проблемы с сердцем</li>
+          <li>Суставы нужно проверять у ветеринара с года</li>
+          <li>Даже здоровую собаку нужно показывать ветеринару раз в год</li>
+        </ul>
+        <span class="more">Подробнее <span>→</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+// ===== фон =====
+const cv=document.getElementById('bg'),ctx=cv.getContext('2d');
+let dpr;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*dpr;cv.height=innerHeight*dpr;cv.style.width=innerWidth+'px';cv.style.height=innerHeight+'px';ctx.setTransform(dpr,0,0,dpr,0,0);place()}
+let spots=[];
+function place(){const w=innerWidth,h=innerHeight;spots=[
+  {bx:w*0.20,by:h*0.22,r:Math.max(w,h)*0.40,base:0.30},
+  {bx:w*0.80,by:h*0.28,r:Math.max(w,h)*0.36,base:0.24},
+  {bx:w*0.66,by:h*0.72,r:Math.max(w,h)*0.42,base:0.28},
+  {bx:w*0.30,by:h*0.82,r:Math.max(w,h)*0.36,base:0.24},
+  {bx:w*0.50,by:h*0.48,r:Math.max(w,h)*0.46,base:0.20}
+].map(s=>({...s,x:s.bx,y:s.by,glow:0}));}
+resize();addEventListener('resize',resize);
+let mx=-9999,my=-9999;
+addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+addEventListener('mouseleave',()=>{mx=-9999;my=-9999});
+addEventListener('touchmove',e=>{const t=e.touches[0];mx=t.clientX;my=t.clientY},{passive:true});
+let t=0;
+function draw(){
+  t+=0.005;ctx.clearRect(0,0,innerWidth,innerHeight);
+  const bg=ctx.createLinearGradient(0,0,innerWidth,innerHeight);bg.addColorStop(0,'#1E2122');bg.addColorStop(1,'#141617');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,innerWidth,innerHeight);
+  ctx.globalCompositeOperation='lighter';
+  for(const s of spots){
+    const driftX=Math.sin(t+s.bx)*18,driftY=Math.cos(t*0.9+s.by)*18;
+    let tX=s.bx+driftX,tY=s.by+driftY;
+    const dx=mx-s.x,dy=my-s.y,dist=Math.hypot(dx,dy);
+    const infl=Math.max(0,1-dist/(s.r*0.9));
+    tX+=dx*infl*0.12;tY+=dy*infl*0.12;
+    const tG=infl*0.9;
+    s.x+=(tX-s.x)*0.06;s.y+=(tY-s.y)*0.06;s.glow+=(tG-s.glow)*0.05;
+    const a=s.base+s.glow*0.25;
+    const g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r);
+    g.addColorStop(0,'rgba(124,150,108,'+a+')');g.addColorStop(0.5,'rgba(92,118,92,'+(a*0.55)+')');g.addColorStop(1,'rgba(92,118,92,0)');
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();
+  }
+  ctx.globalCompositeOperation='source-over';
+  requestAnimationFrame(draw);
+}
+draw();
+
+// ===== факты =====
+var facts=document.querySelectorAll('#facts .fact');
+var fi=0;facts[0].classList.add('active');
+setInterval(function(){
+  var cur=facts[fi];cur.classList.remove('active');cur.classList.add('leaving');
+  var next=(fi+1)%facts.length;
+  setTimeout(function(){cur.classList.remove('leaving');facts[next].classList.add('active');fi=next;},560);
+},3200);
+
+// ===== ротация карточек пород =====
+var cards=document.querySelectorAll('#rotator .breed-card');
+var ci=0;
+setInterval(function(){
+  cards[ci].classList.remove('active');
+  ci=(ci+1)%cards.length;
+  cards[ci].classList.add('active');
+},4000);
+
+// ===== каскадное появление блоков при скролле (один раз, без пульсации) =====
+var blocks=document.querySelectorAll('.block');
+var io=new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){
+      var idx=Array.prototype.indexOf.call(blocks,en.target);
+      setTimeout(function(){en.target.classList.add('shown');},idx*140);
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:0.2});
+blocks.forEach(function(b){io.observe(b);});
+</script>
+</body>
+</html>
